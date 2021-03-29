@@ -11,7 +11,11 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
+<<<<<<< HEAD
         java: ["11", "17"]
+=======
+        java: ["11"]
+>>>>>>> 677a0de (Add GitHub Actions PR Check workflow, fixes JBIDE-27698)
       fail-fast: false
 
     steps:
@@ -27,7 +31,11 @@ jobs:
         repository: jbosstools/jbosstools-build-ci
         path: build-ci
 
+<<<<<<< HEAD
     # Java JDK used for maven build
+=======
+    # Java JDK 11 used for maven build
+>>>>>>> 677a0de (Add GitHub Actions PR Check workflow, fixes JBIDE-27698)
     - name: Setup Java ${{ matrix.java }}
       uses: actions/setup-java@v1
       with:
@@ -44,23 +52,34 @@ jobs:
         restore-keys: |
           jbosstools-${{ runner.os }}-maven-
 
+<<<<<<< HEAD
     # install webkit with gtk 3 for tests
     - name: Install WebKit
       run: |
         sudo apt-get update -y
         sudo apt-get install libwebkit2gtk-4.0-37
 
+=======
+>>>>>>> 677a0de (Add GitHub Actions PR Check workflow, fixes JBIDE-27698)
     # Build and compile using Maven
     - name: Build/Compile and run unit tests
       uses: GabrielBB/xvfb-action@v1
       with:
+<<<<<<< HEAD
         run: mvn clean verify -U -fae -B --settings build-ci/maven-settings.xml -DskipITests=true -Dmaven.test.error.ignore=true -Dmaven.test.failure.ignore=true -ntp
+=======
+        run: mvn clean verify -U -fae -B --settings build-ci/maven-settings.xml -DskipITests=true -Dmaven.test.error.ignore=true -Dmaven.test.failure.ignore=true --no-transfer-progress --quiet
+>>>>>>> 677a0de (Add GitHub Actions PR Check workflow, fixes JBIDE-27698)
 
     # Archive artifacts to be applied in Publish Reports workflow
     - name: Archiving test artifacts
       uses: actions/upload-artifact@v2
       with: 
+<<<<<<< HEAD
         name: ${{ matrix.os }}-${{ matrix.java }}-test-reports
+=======
+        name: ${{ matrix.os }}-test-reports
+>>>>>>> 677a0de (Add GitHub Actions PR Check workflow, fixes JBIDE-27698)
         path: |
           *tests/*/target/surefire-reports/
           */*tests/*/target/surefire-reports/
